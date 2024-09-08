@@ -75,12 +75,26 @@ store_path0=/home/fastdfs/storage
 group_name=group1 
 storage_server_port=23000 
 store_path_count=1
-
+# mysql
+mysql -uroot -p
 # nginx配置
 sudo vim /usr/local/nginx/conf/nginx.conf
+
 # 增加
 location ~/group([0-9])/M([0-9])([0-9]) {     
         ngx_fastdfs_module;
 }
 停止：sudo /usr/local/nginx/sbin/nginx -s stop
 启动：sudo /usr/local/nginx/sbin/nginx
+
+# redis
+vim redis.conf
+
+找到daemonize no 
+
+改为daemonize yes
+启动redis
+redis-server redis.conf
+
+使用redis-cli测试是否正常
+redis-cli -h 127.0.0.1 -p 6379
